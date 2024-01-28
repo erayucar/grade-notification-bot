@@ -10,7 +10,6 @@ import org.openqa.selenium.By
 import org.openqa.selenium.WebElement
 import org.openqa.selenium.chrome.ChromeDriver
 import org.openqa.selenium.chrome.ChromeOptions
-import java.io.File
 import java.io.InputStream
 import java.util.*
 
@@ -35,7 +34,7 @@ fun getCourses(username: String, password: String, targetUrl: String): List<Cour
         usernameInput.sendKeys(username)
         passwordInput.sendKeys(password)
         loginButton.click()
-        courses = getGrades(targetUrl, driver)
+        courses = getGrades(driver)
 
         courses.forEach {
             println(it.name)
@@ -52,7 +51,7 @@ fun getCourses(username: String, password: String, targetUrl: String): List<Cour
     return courses
 }
 
-fun getGrades(baseUrl: String, driver: ChromeDriver): List<Course> {
+fun getGrades(driver: ChromeDriver): List<Course> {
     val gradesUrl = "https://derskayit.cu.edu.tr/Ogrenci/SecilenDersler"
     driver.get(gradesUrl)
 
