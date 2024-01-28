@@ -177,7 +177,7 @@ suspend fun execute(isRunning: Boolean) {
     val telegramChatId = credentials["TELEGRAM_CHAT_ID"].toString()
 
     if (username != null && password != null && targetUrl != null && telegramBotToken != null && telegramChatId != null) {
-        val chromeDriverPath = "path/to/chromeDriver"
+        val chromeDriverPath = "path/to/chromedriver"
         System.setProperty("webdriver.chrome.driver", chromeDriverPath)
         val printedCourses = mutableListOf<Course>()
 
@@ -188,17 +188,17 @@ suspend fun execute(isRunning: Boolean) {
 
             }
 
-            val notPrintedCourse = changedCourses.filter {
-                it !in printedCourses
-            } as MutableList
+            val notPrintedCourses = changedCourses.filter { course ->
+                !printedCourses.any { it.name == course.name }
+            }as MutableList
 
 
-        if (notPrintedCourse.isNotEmpty()) {
-            sendMessage(botToken = telegramBotToken, chatId = telegramChatId, notPrintedCourse)
-            printedCourses.addAll(notPrintedCourse)
+        if (notPrintedCourses.isNotEmpty()) {
+            sendMessage(botToken = telegramBotToken, chatId = telegramChatId, notPrintedCourses)
+            printedCourses.addAll(notPrintedCourses)
         }
         // 1800000 milisaniye (30 dakika) beklet
-        delay(18000000)
+        delay(1000)
     }
 
 } else {

@@ -21,7 +21,7 @@ fun App() {
         }
         Column {
             Text("Sistem başladı... ")
-            Text("30 dakikada bir kontrol edecektir.")
+            Text("15 dakikada bir kontrol edecektir.")
             Text(" Kapatmak istiyorsanız lütfen pencereyi kapatınız")
         }
 
